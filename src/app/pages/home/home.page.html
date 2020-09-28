@@ -1,0 +1,70 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      主页
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen scrollY="false">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">快速开始</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card button="true" color="primary" [routerLink]="['/pages/qr-scanner']">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-items-center" style="display: flex;">
+          <img src="../../../assets/image/sanlunche.png" alt="" />
+        </ion-col>
+        <ion-col>
+          <ion-card-header>
+            <ion-card-title>小票扫描</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>仅适用于持小票进场的三轮车</ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card button="true" color="primary" (click)="showKeyboard()">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-items-center" style="display: flex;">
+          <img src="../../../assets/image/huoche.png" alt="" />
+        </ion-col>
+        <ion-col>
+          <ion-card-header>
+            <ion-card-title>车牌录入</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>仅适用于有车牌号的车辆</ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ng-template #inputBox>
+    <nz-input-group nzCompact>
+      <input
+        readonly
+        type="text"
+        class="inlayInput"
+        *ngFor="let item of inputArr;"
+        [(ngModel)]="item.value"
+        [disabled]="item.disabled"
+        nz-input
+      />
+    </nz-input-group>
+  </ng-template>
+
+  <!-- 键盘 -->
+  <app-virtual-keyboard
+    [(visible)]="visible"
+    [isShowControl]="isShowControl"
+    (onKeyboardClick)="onKeyboardClick($event)"
+    (onClearClick)="onClearClick($event)"
+    (onDelClick)="onDelClick($event)"
+    (onOkClick)="onOkClick($event)"
+    [inputBox]="inputBox"
+    [(currentRenderKeyboard)]="currentRenderKeyboard"
+  >
+  </app-virtual-keyboard>
+</ion-content>

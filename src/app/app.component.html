@@ -1,0 +1,12 @@
+<ion-app>
+  <ng-http-loader
+    [filteredUrlPatterns]="[
+      '/api/access',
+      '/api/sms',
+      '/api/merchant/index',
+      '/api/download',
+      '/api/car/loadAndUnload/index'
+    ]"
+  ></ng-http-loader>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>

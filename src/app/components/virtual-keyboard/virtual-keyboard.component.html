@@ -1,0 +1,69 @@
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="bottom"
+  [nzTitle]="inputBox"
+  nzHeight="auto"
+  (nzOnClose)="close()"
+>
+  <!-- 功能按钮区 -->
+  <div
+    class="group ion-justify-content-center ion-nowrap"
+    *ngIf="isShowControl"
+  >
+    <button
+      class="keyBtn"
+      *ngFor="let item of switchKeyGroup"
+      mat-button
+      (click)="renderKeyboard(item)"
+    >
+      {{ item }}
+    </button>
+  </div>
+  <!-- 键盘区域 -->
+  <div [ngSwitch]="currentRenderKeyboard">
+    <ng-container *ngFor="let items of keyBtnGroup; let i = index">
+      <div *ngSwitchCase="switchKeyGroup[i]">
+        <div
+          class="group ion-justify-content-center ion-nowrap"
+          *ngFor="let btnGroup of items"
+        >
+          <button
+            class="keyBtn"
+            (click)="onKeyboardClick.emit([$event, value])"
+            *ngFor="let value of btnGroup"
+            mat-raised-button
+          >
+            {{ value }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="group ion-justify-content-between ion-nowrap">
+    <button
+      class="fixedBtn"
+      mat-raised-button
+      color="warn"
+      (click)="onClearClick.emit('clear event')"
+    >
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+    <button
+      class="fixedBtn"
+      mat-raised-button
+      color="accent"
+      (click)="onDelClick.emit('del event')"
+    >
+      <ion-icon name="backspace"></ion-icon>
+    </button>
+    <button
+      class="fixedBtn"
+      mat-raised-button
+      color="primary"
+      (click)="onOkClick.emit('ok event')"
+    >
+      确定
+    </button>
+  </div>
+</nz-drawer>

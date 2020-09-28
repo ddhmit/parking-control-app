@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>我的账单</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullMax="500">
+    <ion-refresher-content
+      pullingText="松开刷新"
+      refreshingText="加载中..."
+    ></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ng-container *ngFor="let item of logs">
+      <ion-item-divider>
+        <ion-label style="font-weight: initial; font-size: 0.8rem;">
+          {{item.time}}
+        </ion-label>
+      </ion-item-divider>
+      <ion-virtual-scroll [items]="item.logs" approxItemHeight="61.5px">
+        <ion-item *virtualItem="let log;">
+          <ion-avatar slot="start">
+            <img
+              [src]="log.type == '充值' ? '../../../assets/image/recharge.png' : '../../../assets/image/parkingpay.png'"
+            />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{log.type}}</h2>
+            <p>{{log.time}}</p>
+          </ion-label>
+          <ion-note
+            [color]="log.type == '充值' ? 'warning' : 'dark'"
+            slot="end"
+          >
+            {{log.type == '充值' ? '+' + log.amount : '-' + log.amount}}
+          </ion-note>
+        </ion-item>
+      </ion-virtual-scroll>
+    </ng-container>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="正在加载..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

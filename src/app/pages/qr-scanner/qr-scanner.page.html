@@ -1,0 +1,25 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>小票扫描</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen scrollY="false">
+  <div class="qr-scanner-box">
+    <div class="line"></div>
+    <div class="angle"></div>
+  </div>
+  <div class="qr-control">
+    <ion-button color="dark" (click)="toggleLight()">
+      <ion-icon
+        [name]="light ? 'flash-outline' : 'flash-off-outline'"
+      ></ion-icon>
+    </ion-button>
+    <ion-button color="dark" (click)="toggleCamera()">
+      <ion-icon name="camera-reverse-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

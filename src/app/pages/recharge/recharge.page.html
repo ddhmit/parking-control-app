@@ -1,0 +1,80 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>充值服务</ion-title>
+    <ion-buttons slot="end" [routerLink]="['/pages/recharge-log']">
+      <ion-button color="medium">账单</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card class="button-main-color" style="padding: 25px;">
+    <ion-card-header>
+      <ion-card-subtitle class="ion-text-center" style="color: #fff;">
+        余额
+      </ion-card-subtitle>
+      <ion-card-title class="ion-text-center" style="color: #fff;">
+        ￥43.58
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-grid class="recharge-button-grid">
+    <ion-row>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          30元
+        </button>
+      </ion-col>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          50元
+        </button>
+      </ion-col>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          100元
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          30元
+        </button>
+      </ion-col>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          50元
+        </button>
+      </ion-col>
+      <ion-col class="ion-justify-content-center">
+        <button nz-button nzType="default" nzBlock>
+          100元
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-radio-group value="biff">
+      <ion-item-divider
+        style="background: #fff; margin: 10px 0; font-weight: initial;"
+      >
+        <ion-label>支付方式</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../../assets/image/wxpay.png" />
+        </ion-avatar>
+        <ion-label>微信支付</ion-label>
+        <ion-radio color="warning" slot="end" value="biff"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-button class="button-main-color recharge" expand="block">
+    <!-- <ion-spinner name="crescent"></ion-spinner> -->
+    <ion-text>充值</ion-text>
+  </ion-button>
+</ion-content>

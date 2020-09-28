@@ -1,0 +1,64 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>{{auditInfo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form [formGroup]="infoForm">
+          <ion-item>
+            <ion-label position="stacked">
+              商户名称（提交后不可更改）
+            </ion-label>
+            <ion-input
+              autofocus
+              autocorrect
+              clearInput
+              inputmode="text"
+              type="text"
+              formControlName="name"
+              title="请填写营业执照上的商户名称"
+              placeholder="请填写营业执照上的商户名称"
+              required
+              [disabled]="pageData.merchant.name ? true : false"
+            ></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+      <ion-col *ngFor="let item of uploadEle" size="6">
+        <ion-card button="true" (click)="getPicture(item.ref)">
+          <nz-spin nzTip="上传中..." *ngIf="loading[item.ref]">
+            <img
+              [src]="getImageUrl(item.ref)"
+              [src-fallback]="item.defaultImage"
+              [alt]="item.name"
+            />
+          </nz-spin>
+          <img
+            *ngIf="!loading[item.ref]"
+            [src]="getImageUrl(item.ref)"
+            [src-fallback]="item.defaultImage"
+            [alt]="item.name"
+          />
+          <ion-card-content>
+            {{item.name}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-button
+    (click)="submit()"
+    [disabled]="btnDisabled"
+    class="button-main-color"
+    expand="block"
+  >
+    <ion-spinner *ngIf="crescent" name="crescent"></ion-spinner>
+    <ion-text>{{ crescent ? '提交中，请稍后..' : '提交资料'}}</ion-text>
+  </ion-button>
+</ion-footer>

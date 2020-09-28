@@ -1,0 +1,77 @@
+ion-content {
+  --background: #000;
+}
+.qr-scanner-box {
+  box-sizing: content-box;
+  width: 60vw;
+  height: 60vw;
+  position: relative;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border: 100rem solid rgba(0, 0, 0, 0.5);
+  .line {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(0, 255, 51, 0) 43%, #ccc 211%);
+    border-bottom: 3px solid #ccc;
+    transform: translateY(-100%);
+    animation: radar-beam 2s infinite;
+    animation-timing-function: cubic-bezier(0.53, 0, 0.43, 0.99);
+    animation-delay: 1.4s;
+  }
+
+  &:after,
+  &:before,
+  .angle:after,
+  .angle:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 12vw;
+    height: 12vw;
+    border: 0.3rem solid transparent;
+  }
+
+  &:after,
+  &:before {
+    top: 0;
+    border-top-color: #ccc;
+  }
+
+  .angle:after,
+  .angle:before {
+    bottom: 0;
+    border-bottom-color: #ccc;
+  }
+
+  &:before,
+  .angle:before {
+    left: 0;
+    border-left-color: #ccc;
+  }
+
+  &:after,
+  .angle:after {
+    right: 0;
+    border-right-color: #ccc;
+  }
+}
+
+@keyframes radar-beam {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.qr-control {
+  width: 100%;
+  position: absolute;
+  bottom: 20%;
+  display: flex;
+  justify-content: space-evenly;
+}

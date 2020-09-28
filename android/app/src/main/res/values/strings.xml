@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">智慧平台</string>
+    <string name="title_activity_main">智慧平台</string>
+    <string name="package_name">com.ddhmit.park</string>
+    <string name="custom_url_scheme">com.ddhmit.park</string>
+</resources>

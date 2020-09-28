@@ -1,0 +1,49 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>员工管理</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingText="松开刷新"
+      refreshingText="加载中..."
+    ></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of staffList; index as idx">
+      <ion-item [disabled]="item.status != '正常'">
+        <ion-avatar slot="start">
+          <img src="../../../assets/image/avatar-default.png" />
+        </ion-avatar>
+        <ion-label>
+          <h2>
+            {{item.name}}
+            <ion-note
+              style="font-size: 0.5rem; margin-left: 10px;"
+              *ngIf="item.status != '正常'"
+            >
+              {{ item.status}}
+            </ion-note>
+          </h2>
+          <h3>{{item.phone}}</h3>
+          <p>创建时间：{{item.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="delete(item, idx)">
+          删除
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="add()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

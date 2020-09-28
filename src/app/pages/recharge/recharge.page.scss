@@ -1,0 +1,24 @@
+.recharge-button-grid {
+  padding: 0 16px;
+  ion-col {
+    display: flex;
+    button {
+      padding: 16px;
+      height: auto;
+    }
+    button:focus,
+    button:hover {
+      --antd-wave-shadow-color: #fd9641;
+      border: 1px solid #fd9641;
+      color: #fd9641;
+    }
+  }
+}
+
+.recharge {
+  --border-radius: 2rem;
+  height: 8vh;
+  font-size: 1.2em;
+  width: 90%;
+  margin: 25px auto 0 auto;
+}

@@ -1,0 +1,75 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* 引入antd样式 */
+@import '~ng-zorro-antd/ng-zorro-antd.min.css';
+
+/* 
+* 引入material样式 
+* deeppurple-amber
+* indigo-pink
+* pink-bluegrey
+* purple-green
+*/
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+.button-main-color {
+  --background: #fd9641;
+  --background-activated: #ff8522;
+}
+
+.no-scroll {
+  --overflow: hidden;
+}
+
+.item-panel {
+  background-color: #fff;
+  border-bottom: 10px solid #f2f2f2;
+  padding: 10px 20px;
+  .item-header {
+    padding-bottom: 5px;
+  }
+  .item-content {
+    padding: 5px 0;
+  }
+  .item-header {
+    border-bottom: 1px solid #eee;
+  }
+}
+
+ion-app.cameraView {
+  ion-content {
+    --background: transparent none !important;
+  }
+}
+
+.alert-message {
+  ol {
+    margin: 0;
+    padding: 0 0 0 24px;
+  }
+}

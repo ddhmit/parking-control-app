@@ -1,0 +1,75 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        {{isStart ? '返回主页' : '取消'}}
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="!isStart">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{isStart ? '正在' + curOperation : '开始装/卸车'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ng-template #resultIcon>
+    <ion-icon
+      *ngIf="!curOperation"
+      name="alert-circle-outline"
+      color="primary"
+      style="font-size: 20vw;"
+    ></ion-icon>
+    <ion-icon
+      *ngIf="curOperation"
+      name="time-outline"
+      [color]="curOperation == '装车' ? 'secondary' : 'warning'"
+      style="font-size: 20vw;"
+    ></ion-icon>
+    <nz-descriptions
+      [nzTitle]="pageParams.carNo || '三轮车'"
+      nzSize="small"
+      nzBordered
+    >
+      <nz-descriptions-item nzTitle="识别码">
+        {{pageData._id || '获取中，请稍后...'}}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="进场时间">
+        {{pageData.createdAt ? (pageData.createdAt | date:'yyyy-MM-dd HH:mm:ss')
+        : pageData._id}}
+      </nz-descriptions-item>
+    </nz-descriptions>
+    <ion-label *ngIf="curOperation" class="block-label">
+      {{curOperation}}开始时间 {{pageStartTime}}
+    </ion-label>
+  </ng-template>
+  <nz-result
+    [nzIcon]="resultIcon"
+    [nzTitle]="!curOperation ? '请点击下方装/卸车按钮' : null"
+    [nzSubTitle]="!curOperation ? '您可以通过点击右上角“取消”按钮来终止本次操作' : '为保障您的合法权益，请在确认收到货款后点击下方“'+curOperation+'结束”按钮，放行后车辆可正常离开市场'"
+  >
+    <div nz-result-extra>
+      <ng-container *ngIf="!isStart">
+        <ion-button color="secondary" (click)="start('装车')">
+          <ion-icon slot="start" name="download-outline"></ion-icon>
+          开始装车
+        </ion-button>
+        <ion-button color="warning" (click)="start('卸车')">
+          开始卸车
+          <ion-icon slot="end" name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ng-container>
+      <ng-container *ngIf="isStart">
+        <ion-label class="block-label" style="margin-bottom: 20px;">
+          已用时：{{ pageTimerTotal }}
+        </ion-label>
+        <ion-button
+          expand="block"
+          [color]="curOperation == '装车' ? 'secondary' : 'warning'"
+          (click)="stop()"
+        >
+          {{curOperation}}结束
+        </ion-button>
+      </ng-container>
+    </div>
+  </nz-result>
+</ion-content>

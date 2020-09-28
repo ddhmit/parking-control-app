@@ -1,0 +1,36 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>商户信息</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">商户信息</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ng-template #circle>
+    <div class="circle">
+      <ion-text style="font-size: 1.3rem;">{{info.integral}}</ion-text>
+      <ion-text
+        >所获积分
+        <ion-icon
+          name="help-circle-outline"
+          style="vertical-align: middle;"
+          nzTooltipTitle="该积分为当前商户对来往车辆进行正确放行，累计所得的奖励积分。"
+          nzTooltipPlacement="bottomLeft"
+          nz-tooltip
+        ></ion-icon>
+      </ion-text>
+    </div>
+  </ng-template>
+  <nz-result [nzIcon]="circle" [nzTitle]="info.name">
+    <div nz-result-extra>
+      入驻时间：{{ info.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}
+    </div>
+  </nz-result>
+</ion-content>

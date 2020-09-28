@@ -1,0 +1,18 @@
+.group {
+  display: flex;
+}
+.keyBtn,
+.fixedBtn {
+  min-width: 0;
+  flex: 1 1 64px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 0 10px;
+}
+ion-icon[name='backspace'] {
+  font-size: 1.5em;
+}
+.fixedBtn {
+  margin-top: 10px;
+  width: 100%;
+}

@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>车辆放行记录</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-segment [value]="segment" style="border-radius: 0px; background: #fff;">
+  <ion-segment-button value="全部" (click)="segment = '全部';segmentChange();">
+    <ion-label>全部</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="装车" (click)="segment = '装车';segmentChange();">
+    <ion-label>装车</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="卸车" (click)="segment = '卸车';segmentChange();">
+    <ion-label>卸车</ion-label>
+  </ion-segment-button>
+</ion-segment>
+<ion-content style="background: #f2f2f2; z-index: 0;">
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="segmentChange($event)"
+    pullMax="500"
+  >
+    <ion-refresher-content
+      pullingText="松开刷新"
+      refreshingText="加载中..."
+    ></ion-refresher-content>
+  </ion-refresher>
+  <ion-virtual-scroll [items]="pageData" approxItemHeight="170px">
+    <div
+      class="item-panel"
+      *virtualItem="let item;"
+      [routerLink]="['/green-light']"
+      [queryParams]="item.car.type == '三轮车' ? {carInOut: item._id} : {carNo: item.car.info.result.PlateResult.license}"
+    >
+      <div class="item-header">
+        <nz-tag
+          [nzColor]="item.pathway.operation == '装车' ? 'blue' : 'gold'"
+          style="margin-right: 0;"
+          >{{item.pathway.operation.substr(0, 1)}}
+        </nz-tag>
+        <ion-label>
+          {{item.car.type == '三轮车' ? '识别码' : '车牌号'}}：{{item.car.type
+          == '三轮车' ? item._id : item.car.info.result.PlateResult.license}}
+        </ion-label>
+        <nz-badge
+          *ngIf="item.pathway.status == '进行中'"
+          class="ion-float-right"
+          nzStatus="processing"
+          [nzText]="item.pathway.operation + '中'"
+        ></nz-badge>
+        <nz-badge
+          *ngIf="item.pathway.status == '放行'"
+          class="ion-float-right"
+          nzStatus="default"
+          [nzText]="'完成'"
+        ></nz-badge>
+      </div>
+      <div class="item-content">
+        <div>
+          入场时间：
+          <ion-note>
+            {{item.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}
+          </ion-note>
+        </div>
+        <div>
+          操作时间：
+          <ion-note>
+            {{item.pathway.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}
+          </ion-note>
+        </div>
+        <div>
+          放行时间：
+          <ion-note>
+            {{item.pathway.status == '放行' ? (item.pathway.updatedAt |
+            date:'yyyy-MM-dd HH:mm:ss') : item.pathway.operation + '中'}}
+          </ion-note>
+        </div>
+        <div *ngIf="item.pathway.status == '放行'">
+          司机手机号：
+          <ion-note>
+            {{item.phone || '未备注'}}
+          </ion-note>
+        </div>
+      </div>
+      <div class="item-footer">
+        <ion-label>
+          {{item.pathway.status == '放行' ? '总' : '已'}}耗时：
+          <ion-note
+            >{{totalTime(item.pathway.createdAt, item.pathway.status == '放行' ?
+            item.pathway.updatedAt : undefined)}}</ion-note
+          >
+        </ion-label>
+        <ion-note
+          *ngIf="item.pathway.status == '放行'"
+          color="danger"
+          class="ion-float-right"
+        >
+          积分+1
+        </ion-note>
+      </div>
+    </div>
+  </ion-virtual-scroll>
+  <ion-infinite-scroll threshold="130px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="dots"
+      loadingText="正在加载..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
